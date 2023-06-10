@@ -10,7 +10,8 @@ const AddPost = ({ size, open, setSize, setOpen, postList }) => {
   const [comment, setComment] = useState();
 
   const handleSubmit = (e) => {
-    const user = localStorage.getItem("user");
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
     const posts = [
       {
         postedBy: user.name,

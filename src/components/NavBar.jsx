@@ -1,7 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import Dropdown from "react-bootstrap/Dropdown";
 
-const NavBar = ({ name, password, logout }) => {
+const NavBar = ({ name, password, handleLogout }) => {
   return (
     <>
       <div className="header">
@@ -26,12 +27,23 @@ const NavBar = ({ name, password, logout }) => {
               </div>
             );
           })}
+
+          <Dropdown>
+            <Dropdown.Toggle>
+              <div className="headerOptions">
+                <i class="bi bi-person-circle"></i>
+                <span>me</span>
+              </div>
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => handleLogout()}>
+                Logout
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
-        <div>
-          <Button style={{ marginTop: "-7px" }} onClick={() => logout()}>
-            Logout
-          </Button>
-        </div>
+        <div></div>
       </div>
       <div className="mbheader">
         <div className="headerLeft">
@@ -57,6 +69,10 @@ const NavBar = ({ name, password, logout }) => {
               </div>
             );
           })}
+          <div className="headerOptions">
+            <i class="bi bi-person-circle"></i>
+            <span>me</span>
+          </div>
         </div>
       </div>
     </>
@@ -71,12 +87,12 @@ const navOption = [
     title: "Home",
   },
   { icon: <i class="bi bi-people-fill"></i>, title: "My Network" },
-  { icon: <i class="bi bi-chat-dots-fill"></i>, title: "Jobs" },
+  { icon: <i class=" bi bi-briefcase-fill"></i>, title: "Jobs" },
   {
-    icon: <i class="bi bi-briefcase-fill"></i>,
+    icon: <i class="bi bi-chat-dots-fill"></i>,
     title: "Messaging",
   },
   { icon: <i class="bi bi-bell-fill"></i>, title: "Notifications" },
-  { icon: <i class="bi bi-person-circle"></i>, title: "me" },
+
   { icon: <i class="bi bi-grid-3x3-gap-fill"></i>, title: "work" },
 ];

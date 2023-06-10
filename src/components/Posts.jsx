@@ -11,11 +11,12 @@ const Posts = ({ name }) => {
   const [comment, setComment] = useState("");
 
   const handlePost = (e) => {
+    const user = JSON.parse(localStorage.getItem("user"));
     e.preventDefault();
 
     const posts = {
       id: uuidv4(),
-      postedBy: name,
+      postedBy: user.name,
       postText: post,
       likes: false,
       comments: [

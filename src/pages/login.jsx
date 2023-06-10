@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Home from "./home";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(
@@ -11,20 +14,25 @@ const Login = () => {
 
   const handleSubmit = () => {
     const user = JSON.parse(localStorage.getItem("user"));
-
-    if (user.name === name && user.password === password) {
-      localStorage.setItem("isLogin", true);
-      setIsLogin(true);
+    if (user) {
+      if (user.name === name && user.password === password) {
+        localStorage.setItem("isLogin", true);
+        setIsLogin(true);
+      } else {
+        alert("Invalid Information");
+      }
+      setName("");
+      setPassword("");
     } else {
-      alert("Invalid Information");
+      navigate("/signup");
     }
-    setName("");
-    setPassword("");
   };
 
   const handleLogout = () => {
     localStorage.setItem("isLogin", false);
     setIsLogin(false);
+
+    navigate("/");
   };
 
   return (
@@ -53,13 +61,16 @@ const Login = () => {
             </div>
             <div className="formButton">
               <Button variant="primary" onClick={() => handleSubmit()}>
-                Sign in
+                Submit
               </Button>
+            </div>
+            <div className="mt-4">
+              Don't have an account? <Link to="/signup">click here</Link>
             </div>
           </div>
         </div>
       ) : (
-        <Home name={name} password={password} logout={handleLogout} />
+        <Home name={name} password={password} handleLogout={handleLogout} />
       )}
     </>
   );

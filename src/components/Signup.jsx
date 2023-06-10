@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Login from "../pages/login";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -30,6 +31,12 @@ const Signup = () => {
   };
 
   const handleSignup = () => {
+    const users = JSON.parse(localStorage.getItem("user"));
+    if (users) {
+      if (users.email === email) {
+        return alert("user already exist");
+      }
+    }
     const user = {
       name: name,
       email: email,
@@ -93,6 +100,10 @@ const Signup = () => {
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="Contact"
+                min={0}
+                max={10}
+                minLength={0}
+                maxLength={10}
               />
             </div>
             <div className="formInput">
@@ -117,8 +128,11 @@ const Signup = () => {
             </div>
             <div className="formButton">
               <Button variant="primary" onClick={() => handleSignup()}>
-                Sign in
+                Submit
               </Button>
+            </div>
+            <div className="mt-4">
+              Already have an account? <Link to="/"> Login</Link>
             </div>
           </div>
         </div>

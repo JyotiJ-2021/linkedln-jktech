@@ -11,7 +11,10 @@ const DisplayPost = ({ post, handleLike, id }) => {
   return (
     <div className="displayContainer">
       <div className="displaypostContainer">
-        <div className="profilepostContainer">{post.postedBy}</div>
+        <div className="profilepostContainer">
+          {" "}
+          <i class="bi bi-person-circle"></i> {post.postedBy}
+        </div>
         <div className="nameContainer">
           <p>
             <i class="bi bi-three-dots"></i>{" "}

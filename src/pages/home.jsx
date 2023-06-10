@@ -5,13 +5,13 @@ import Posts from "../components/Posts";
 import SideBar from "../components/SideBar";
 import NavBar from "../components/NavBar";
 
-const Home = ({ name, password, logout }) => {
+const Home = ({ name, password, handleLogout }) => {
   return (
     <div className="App">
-      <NavBar name={name} password={password} logout={logout} />
+      <NavBar name={name} password={password} handleLogout={handleLogout} />
       <div style={{ textAlign: "center", padding: "10px" }}>
-        <a href="">Hiring in a hurry?</a>-Find Talented Pros in record time with
-        upwork and keep business moving
+        <a href="/">Hiring in a hurry?</a>-Find Talented Pros in record time
+        with upwork and keep business moving
       </div>
       <div className="row">
         <div className="col-md-3 col-sm-12">
