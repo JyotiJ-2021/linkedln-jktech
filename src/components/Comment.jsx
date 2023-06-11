@@ -1,15 +1,30 @@
 import React, { useState } from "react";
 
-const Comment = () => {
-  const [comment, setComment] = useState(
-    JSON.parse(localStorage.getItem(`comments`)) || ""
-  );
-  const [comments, setComments] = useState("");
+const Comment = ({ postId, post }) => {
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
 
   const handleSubmit = (e) => {
-    localStorage.setItem(`comments`, JSON.stringify(comments));
-    setComments("");
+    e.preventDefault();
+    const postLists = JSON.parse(localStorage.getItem("postlist"));
+
+    for (let i = 0; i < postLists.length; i++) {
+      if (postLists[i].id === postId) {
+        const comm = {
+          by: postLists[i].postedBy,
+          comment: comment,
+        };
+
+        postLists[i].comments.push(comm);
+      }
+    }
+    localStorage.setItem("postlist", JSON.stringify(postLists));
+    setComment("");
+    setComments(postLists);
+    window.location.reload();
   };
+
+  console.log(post);
 
   return (
     <div className="commentContainer">
@@ -20,20 +35,25 @@ const Comment = () => {
             <input
               type="text"
               placeholder="Add a comment"
-              value={comments}
-              onChange={(e) => setComments(e.target.value)}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
             />
           </form>
         </div>
       </div>
-      {comment !== "" && (
-        <div className="comments">
-          <div className="commetorDetails">
-            <p>{comment}</p>
-          </div>
-          <div className="comment_content"></div>
-        </div>
-      )}
+      {post &&
+        post.comments.map((item, i) => {
+          return (
+            item.comment && (
+              <div className="comments">
+                <div className="commetorDetails">
+                  <p>{item.comment}</p>
+                </div>
+                <div className="comment_content"></div>
+              </div>
+            )
+          );
+        })}
     </div>
   );
 };

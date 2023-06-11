@@ -8,6 +8,8 @@ const DisplayPost = ({ post, handleLike, id }) => {
     setshowComments(!showComments);
   };
 
+  // console.log(post);
+
   return (
     <div className="displayContainer">
       <div className="displaypostContainer">
@@ -49,7 +51,7 @@ const DisplayPost = ({ post, handleLike, id }) => {
           </p>
         </div>
       </div>
-      {showComments && <Comment postId={post.id} CommentBy={post} />}
+      {showComments && <Comment postId={post.id} post={post} />}
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import DisplayPost from "./DisplayPost";
 import Button from "react-bootstrap/Button";
+import { v4 as uuidv4 } from "uuid";
 
 const AddPost = ({ size, open, setSize, setOpen, postList }) => {
   const [postText, setPostText] = useState();
@@ -14,27 +15,25 @@ const AddPost = ({ size, open, setSize, setOpen, postList }) => {
     console.log(user);
     const posts = [
       {
+        id: uuidv4(),
         postedBy: user.name,
         postText: postText,
         likes: likes,
-        comments: [
-          {
-            by: by,
-            comment: comment,
-          },
-        ],
+        comments: [],
       },
     ];
 
-    for (let i = 0; i < 10; i++) {
-      postList[i] = posts;
-    }
+    const newPostList = [...postList, posts].reverse();
 
-    postList[size] = posts;
+    // for (let i = 0; i < 10; i++) {
+    //   postList[i] = posts;
+    // }
 
-    setSize(size + 1);
+    // postList[size] = posts;
 
-    localStorage.setItem("posttlist", JSON.stringify(postList));
+    // setSize(size + 1);
+
+    localStorage.setItem("postlist", JSON.stringify(newPostList));
   };
   return (
     <div>
