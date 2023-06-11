@@ -19,12 +19,7 @@ const Posts = ({ name }) => {
       postedBy: user.name,
       postText: post,
       likes: false,
-      comments: [
-        {
-          by: name,
-          comment: comment,
-        },
-      ],
+      comments: [],
     };
     const newPostList = [...postList, posts].reverse();
 

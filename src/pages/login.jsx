@@ -18,6 +18,7 @@ const Login = () => {
       if (user.name === name && user.password === password) {
         localStorage.setItem("isLogin", true);
         setIsLogin(true);
+        navigate("/home");
       } else {
         alert("Invalid Information");
       }

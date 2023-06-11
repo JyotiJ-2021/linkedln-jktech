@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Login from "../pages/login";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -10,6 +10,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
@@ -64,79 +65,76 @@ const Signup = () => {
       return;
     }
 
-    setOpen(true);
     localStorage.setItem("user", JSON.stringify(user));
+    navigate("/");
   };
+
   return (
     <div>
-      {open ? (
-        <Login />
-      ) : (
-        <div>
-          <div className="loginContent">
-            <div className="loginHeading">Signup</div>
-            <div className="formInput">
-              <input
-                type="text"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Name"
-              />
-            </div>
-            <div className="formInput">
-              <input
-                type="email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-              />
-            </div>
-            <div className="formInput">
-              <input
-                type="number"
-                name="contact"
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-                placeholder="Contact"
-                min={0}
-                max={10}
-                minLength={0}
-                maxLength={10}
-              />
-            </div>
-            <div className="formInput">
-              <input
-                type="password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-                onBlur={(e) => validatePassword(e.target.value)}
-              />
-            </div>
-            <div className="formInput">
-              <input
-                type="password"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Password"
-                onBlur={(e) => validateConfirmPassword(e.target.value)}
-              />
-            </div>
-            <div className="formButton">
-              <Button variant="primary" onClick={() => handleSignup()}>
-                Submit
-              </Button>
-            </div>
-            <div className="mt-4">
-              Already have an account? <Link to="/"> Login</Link>
-            </div>
+      <div>
+        <div className="loginContent">
+          <div className="loginHeading">Signup</div>
+          <div className="formInput">
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Name"
+            />
+          </div>
+          <div className="formInput">
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+            />
+          </div>
+          <div className="formInput">
+            <input
+              type="number"
+              name="contact"
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              placeholder="Contact"
+              min={0}
+              max={10}
+              minLength={0}
+              maxLength={10}
+            />
+          </div>
+          <div className="formInput">
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              onBlur={(e) => validatePassword(e.target.value)}
+            />
+          </div>
+          <div className="formInput">
+            <input
+              type="password"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm Password"
+              onBlur={(e) => validateConfirmPassword(e.target.value)}
+            />
+          </div>
+          <div className="formButton">
+            <Button variant="primary" onClick={() => handleSignup()}>
+              Submit
+            </Button>
+          </div>
+          <div className="mt-4">
+            Already have an account? <Link to="/"> Login</Link>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

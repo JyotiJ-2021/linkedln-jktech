@@ -25,14 +25,6 @@ const AddPost = ({ size, open, setSize, setOpen, postList }) => {
 
     const newPostList = [...postList, posts].reverse();
 
-    // for (let i = 0; i < 10; i++) {
-    //   postList[i] = posts;
-    // }
-
-    // postList[size] = posts;
-
-    // setSize(size + 1);
-
     localStorage.setItem("postlist", JSON.stringify(newPostList));
   };
   return (
